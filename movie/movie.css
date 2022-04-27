@@ -1,0 +1,256 @@
+.bigMovieContainer {
+    position: relative;
+    width: 100%;
+}
+
+.bigMovieContainer > img {
+    width: 100%;
+}
+
+.tiser {
+    display: flex;
+    width: 60%;
+    position: relative;
+    top: -10vw;
+    right: 20%;
+}
+
+.rateContainer {
+    position: relative;
+    flex-basis: 22%;
+    background-color: #B12025;
+    color: #FFFFFF;
+    z-index: 50;
+    opacity: 0.9;
+    height: 14vw;
+}
+
+.iemdbRate {
+    position: relative;
+    height: 10vw;
+    font-size: 3vmax;
+}
+
+.iemdbRate > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.star {
+    position: absolute;
+    cursor: pointer;
+    top: 64%;
+    left: 50%;
+    width: 14%;
+    transform: translateX(-50%);
+}
+
+.star > img {
+    width: 100%;
+}
+
+.userRate {
+    display: flex;
+    position: relative;
+}
+
+.userRateText {
+    font-size: 1.1vmax;
+}
+
+.numRates {
+    margin-top: 0.3vmax;
+    font-weight: 100;
+    font-size: 0.9vmax;
+}
+
+.userRate > div {
+    padding: 0.4vmax;
+    text-align: center;
+}
+
+.userRate > div:last-of-type {
+    position: absolute;
+    left: 0;
+    padding: 0.5vmax 18% 0.9vmax;
+    font-size: 1.6vmax;
+}
+
+.details {
+    position: relative;
+    flex-basis: 56%;
+    color: #FFFFFF;
+    padding: 2px 6px;
+    font-size: 0.9vmax;
+    line-height: 2vmax;
+    font-weight: 100;
+}
+
+.details > .title {
+    direction: ltr;
+    font-size: 1.1vmax;
+    font-weight: 300;
+}
+
+.details > .publishDate {
+    direction: ltr;
+    position: relative;
+    left: 2vmax;
+    font-weight: 300;
+}
+
+hr {
+    border: solid 0 #FFFFFF;
+    height: 0.4px;
+}
+
+.details > hr {
+    margin: 1.3vw auto;
+    background-color: #4E4E50;
+    width: 90%;
+}
+
+.details > .description {
+    margin-right: -8px;
+    line-height: 1.4vmax;
+    font-weight: 300;
+}
+
+.smallMovieContainer {
+    flex-basis: 22%;
+    height: 17vw;
+}
+
+.smallMovieContainer > img {
+    width: 100%;
+    height: 100%;
+}
+
+.centeredBox {   
+    width: 60%;
+    position: relative;
+    right: 20%;
+    border-radius: 18px;
+    background-color: #4E4E50;
+}
+
+.actors {
+    direction: ltr;
+}
+
+.actorsContainer {
+    height: 21vh;
+}
+
+.centeredBox > p {
+    color: #FFFFFF;
+    width: 100%;
+    font-size: 1vmax;
+    text-align: center;
+}
+
+.actor {
+    width: 15%;
+    height: 80%;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 1.5% 3.5%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.actor:first-of-type {
+    margin-left: 7%;
+}
+
+.actor:last-of-type {
+    margin-right: 7%;
+}
+
+.actor > img {
+    object-position: 0 0;
+    width: 100%;
+    height: 140%;
+}
+
+.image.actor .coverText {
+    font-size: 80%;
+    top: 40%;
+}
+
+.image.actor .coverText:last-of-type {
+    top: 60%;
+}
+
+.comments {
+    margin-top: 5vh;
+    margin-bottom: 25vh;
+    position: relative;
+    padding: 0.6vw 0 2vw;
+}
+
+.comments > p {
+    margin-top: 1vw;
+}
+
+.comment {
+    position: relative;
+    width: 80%;
+    height: 8vw;
+    background-color: #FFFFFF;
+    color: #292929;
+    border-radius: 18px;
+    padding: 0.35vw 2.3vw 0.35vw 0.7vw;
+    margin: 2vw auto 0;
+    font-weight: bold;
+    font-size: 1.1vmax;
+}
+
+.comment > .submit {
+    cursor: pointer;
+    background-color: rgb(67, 216, 101);
+    color: #FFFFFF;
+    direction: ltr;
+    display: inline-block;
+    border-radius: 7px;
+    padding: 0.5vw 3vw;
+    position: absolute;
+    left: 0.9vw;
+    top: 5vw;
+}
+
+.username {
+    font-size: 1.3vmax;
+    font-weight: bold;
+}
+
+.comment > hr {
+    width: 99%;
+    background-color: #dedede;
+    margin: 0.8vw 0px;
+}
+
+.comment > div {
+    display: flex;
+}
+
+.commentText {
+    margin-right: 20px;
+}
+
+.votes {
+    position: absolute;
+    left: 2%;
+    display: flex;
+    text-align: center;
+}
+
+.upvote {
+    color: rgb(67, 216, 101);
+}
+
+.downvote {
+    color: #fb2129;
+}

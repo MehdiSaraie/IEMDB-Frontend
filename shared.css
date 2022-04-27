@@ -1,0 +1,108 @@
+
+@font-face {
+    font-family: Vazir;
+    src: url('vazir-font-v16.1.0/Vazir.woff');
+    font-weight: normal;
+}
+        
+@font-face {
+    font-family: Vazir;
+    src: url('vazir-font-v16.1.0/Vazir-Bold.woff');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('vazir-font-v16.1.0/Vazir-Light.woff');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url('vazir-font-v16.1.0/Vazir-Thin.woff');
+    font-weight: 100;
+}
+
+.header {
+    background-color: #B12025;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.iemdbIcon {
+    position: absolute;
+    left: 0;
+    height: 100%;
+}
+
+.profileIcon {
+    height: 75%;
+    position: absolute;
+    right: 1%;
+    top: 12.5%;
+}
+
+
+.main {
+    position: relative;
+    top: 60px;
+}
+
+.image {
+    position: relative;
+    text-align: center;
+}
+
+.image:hover > a.cover {
+    top: 0;
+    transform: scaleY(1);
+    transition: all 0.7s;
+}
+
+a.cover {
+    opacity : 0.7;
+    position : absolute;
+    left : 0;
+    right: 0;
+    bottom: 0;
+    background-color : #da0c4d;
+    z-index : 3;
+    transform: scaleY(0);
+}
+
+.image:hover {
+    transition: all 0.7s;
+}
+
+.image:hover .coverText {
+    opacity: 1;
+    transition: all 0.7s;
+}
+
+.image .coverText {
+    text-decoration: none;
+    display: block;
+    opacity: 0;
+    color: #FFFFFF;
+    position: absolute;
+    top: 13%;
+    z-index: 5;
+    text-align: center;
+    width: 100%;
+    font-weight: 300;
+    font-size: 120%;
+}
+
+.image .coverText:last-of-type {
+    top: 35%
+}
+
+.horizontal-scrollable {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}

@@ -1,0 +1,65 @@
+.main {
+    display: flex;
+    color: #FFFFFF;
+}
+
+.actor {
+    width: 25%;
+    height: 65vh;
+    position: absolute;
+    left: 0;
+}
+
+.actor > img {
+    width: 100%;
+    height: 100%;
+}
+
+.details {
+    width: 75%;
+}
+
+.info {
+    margin-right: 5%;
+}
+
+.info > p {
+    line-height: 4vh;
+    font-weight: 300;
+}
+
+.info > p:first-of-type {
+    text-align: center;
+    margin: 1.75vh auto 2.5vh;
+}
+
+.movies {
+    margin: auto 20px;
+    text-align: center;
+    direction: ltr;
+}
+
+.movies > p {
+    margin: 6.5vh auto 1.75vh;
+}
+
+.moviesContainer {
+    background-color: #4E4E50;
+    border-radius: 18px;
+    height: 25vh;
+    padding: 2vh 0;
+}
+
+.image.movie {
+    height: 100%;
+    margin: auto 7%;
+}
+
+.image.movie > img {
+    height: 100%;
+}
+
+.image.movie .coverText {
+    font-size: 120%;
+    top: 5%;
+}

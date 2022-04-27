@@ -1,0 +1,91 @@
+.main {
+    color: #FFFFFF;
+}
+
+.watchlistMovies {
+    margin: 12vh auto 0;
+    width: 56%;
+}
+
+.watchlistMovies > .movie {
+    margin: 4vh auto;
+    display: flex;
+    height: 23vh;
+    border-radius: 15px;
+    background-color: #4E4E50;
+}
+
+.info {
+    display: flex;
+    font-size: 1.1vmax;
+    font-weight: 300;
+    width: 83%;
+}
+
+.info > div {
+    padding: 0.5vh 1.5%;
+}
+
+.details {
+    width: 50%;
+    line-height: 2vmax;
+}
+
+.details span {
+    font-weight: bold;
+}
+
+.trashIcon {
+    color: #ff4800;
+    margin-right: 2%;
+    margin-bottom: 1vh;
+}
+
+.rates {
+    width: 25%;
+    font-weight: bold;
+}
+
+.title {
+    width: 25%;
+    font-size: 1.3vmax;
+    text-align: center;
+}
+
+.normalImage {
+    width: 17%;
+    height: 100%;
+}
+
+.normalImage > img {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px 0 0 15px;
+}
+
+.suggestedMovies {
+    width: 60%;
+    background-color: #4E4E50;
+    border-radius: 18px;
+    margin: 20vh auto 28vh;
+    text-align: center;
+    direction: ltr;
+}
+
+.suggestedMovies > p {
+    margin: 0 auto 1.75vh;
+}
+
+.moviesContainer {
+    height: 25vh;
+    padding: 2vh 0 6.5vh;
+}
+
+.image.movie {
+    height: 100%;
+    margin: auto 6%;
+}
+
+.image.movie > img {
+    height: 100%;
+}
