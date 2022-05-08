@@ -1,0 +1,60 @@
+.actor-main {
+    display: flex;
+    color: #FFFFFF;
+}
+
+.actor-actor {
+    width: 25%;
+    height: 65vh;
+    position: absolute;
+    left: 0;
+}
+
+.actor-actor > img {
+    width: 100%;
+    height: 100%;
+}
+
+.actor-details {
+    width: 75%;
+}
+
+.actor-info {
+    margin-right: 5%;
+}
+
+.actor-info > p {
+    line-height: 4vh;
+    font-weight: 300;
+}
+
+.actor-info > p:first-of-type {
+    text-align: center;
+    margin: 1.75vh auto 2.5vh;
+}
+
+.actor-movies {
+    margin: auto 20px;
+    text-align: center;
+    direction: ltr;
+}
+
+.actor-movies > p {
+    margin: 6.5vh auto 1.75vh;
+}
+
+.actor-moviesContainer {
+    background-color: #4E4E50;
+    border-radius: 18px;
+    height: 25vh;
+    padding: 2vh 0;
+}
+
+.actor-hoverable-image.actor-movie {
+    height: 100%;
+    margin: auto 7%;
+}
+
+.actor-hoverable-image.actor-movie > img {
+    height: 100%;
+}

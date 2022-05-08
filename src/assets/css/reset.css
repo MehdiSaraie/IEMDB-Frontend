@@ -1,0 +1,9 @@
+body, div, p, input, button, textarea {
+    margin: 0;
+    font-family: 'Vazir', sans-serif;
+}
+
+body {
+    direction: rtl;
+    background-color: #292929;
+}

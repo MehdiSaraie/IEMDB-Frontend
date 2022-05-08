@@ -1,0 +1,117 @@
+@font-face {
+    font-family: Vazir;
+    src: url(../fonts/vazir-font-v16.1.0/Vazir.woff);
+    font-weight: normal;
+}
+        
+@font-face {
+    font-family: Vazir;
+    src: url(../fonts/vazir-font-v16.1.0/Vazir-Bold.woff);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url(../fonts/vazir-font-v16.1.0/Vazir-Light.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Vazir;
+    src: url(../fonts/vazir-font-v16.1.0/Vazir-Thin.woff);
+    font-weight: 100;
+}
+
+.header {
+    background-color: #B12025;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.iemdbIcon {
+    position: absolute;
+    left: 0;
+    height: 100%;
+}
+
+.profileIcon {
+    height: 75%;
+    position: absolute;
+    right: 1.5%;
+    top: 12.5%;
+    cursor: pointer;
+}
+
+
+.main {
+    position: relative;
+    top: 60px;
+}
+
+.hoverable-image {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hoverable-image:hover > a.cover {
+    top: 0;
+    transform: scaleY(1);
+    transition: all 0.7s;
+}
+
+a.cover {
+    opacity : 0.7;
+    position : absolute;
+    left : 0;
+    right: 0;
+    bottom: 0;
+    background-color : #da0c4d;
+    z-index : 3;
+    transform: scaleY(0);
+}
+
+.hoverable-image:hover {
+    transition: all 0.7s;
+}
+
+.hoverable-image:hover .coverText {
+    opacity: 1;
+    transition: all 0.7s;
+}
+
+.hoverable-image .coverText {
+    opacity: 0;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    text-align: center;
+    font-weight: 300;
+    font-size: 115%;
+    padding: 0 8%;
+}
+
+.hoverable-image .coverText > a {
+    display: block;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding: 15% 0 10%;
+}
+
+.hoverable-image .coverText > a:last-of-type {
+    padding: 0;
+}
+
+.horizontal-scrollable {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
