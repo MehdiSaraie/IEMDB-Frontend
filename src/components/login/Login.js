@@ -49,14 +49,16 @@ class Login extends Component {
                         <div className="text-center">
                             <button type="submit" className="login-submit">ورود</button>
                         </div>
-                        <br />
-                        <a className="signup" onClick={() => reactDom.render(<Signup page={this.props.page} movie={this.props.movie} />, document.getElementById("root"))}>حساب نداربد؟ اینجا کلیک کنید</a>
-                        <br />
-                        <br />
                     </form>
+                    <div className="text-center">
+                        <a href="https://github.com/login/oauth/authorize?client_id=17736afbe983a0754dd1&scope=user"><button type="submit" className="login-submit">احراز هویت با گیت هاب</button></a>
+                    </div>
+                    <br />
+                    <a className="signup" onClick={() => reactDom.render(<Signup page={this.props.page} movie={this.props.movie} />, document.getElementById("root"))}>حساب نداربد؟ اینجا کلیک کنید</a>
+                    <br />
+                    <br />
                 </div>
             </>
-            
         );
     }
 }
