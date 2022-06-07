@@ -79,10 +79,10 @@ export default function App() {
 
                     <div className="content">
                         <Switch>
-                            <PublicRoute path="/login">
+                            <PublicRoute path="/users/login">
                                 <Login />
                             </PublicRoute>
-                            <PublicRoute path="/signup">
+                            <PublicRoute path="/users/signup">
                                 <Signup />
                             </PublicRoute>
                             <PrivateRoute path="/movies">
