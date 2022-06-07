@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router';
 import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
 import Login from "./Login";
 import Input from '../components/Input';
+import { useAuth } from "../../hooks/use-auth";
 
 
 export default function Signup() {
@@ -13,14 +15,14 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const history = useHistory();
+    // const navigate = useNavigate();
     const auth = useAuth();
 
     function signup(e) {
         e.preventDefault();
         auth.signup(name, nickname, birthDate, email, password).then(() => {
             toast.success('باموفقیت ثبت‌نام شدید.');
-            history.push('/');
+            // navigate('/');
         }).catch((err) => {
             let message;
             try {

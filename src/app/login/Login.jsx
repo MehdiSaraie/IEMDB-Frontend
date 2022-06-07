@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
@@ -13,7 +13,7 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const history = useHistory();
+    // const navigate = useNavigate();
     const auth = useAuth();
 
     function login(e) {
@@ -21,7 +21,7 @@ export default function Login() {
 
         auth.login(email, password).then(() => {
             toast.success('باموفقیت وارد شدید.');
-            history.push('/');
+            // navigate('/');
         }).catch(() => {
             toast.error('ایمیل یا رمز عبور اشتباه است.');
         });
