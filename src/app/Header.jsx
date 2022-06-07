@@ -13,9 +13,9 @@ const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, sear
         if (clickedText === 'watch list')
             reactDom.render(<Watchlist />, document.getElementById("root"));
         if (clickedText === 'ورود')
-            reactDom.render(<Login page='movies' />, document.getElementById("root"));
+            reactDom.render(<Login/>, document.getElementById("root"));
         if (clickedText === 'ثبت نام')
-            reactDom.render(<Signup page='movies' />, document.getElementById("root"));
+            reactDom.render(<Signup/>, document.getElementById("root"));
     }
 
     return (

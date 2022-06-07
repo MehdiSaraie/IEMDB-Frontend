@@ -152,10 +152,10 @@ class Comment extends Component {
             this.setState(prevState => ({vote: newVote}));
     };
 
-    voteComment = async () => {
-        const response = await fetch(`${apiUrl}comments/${this.props.comment.id}/addVote?vote=${this.state.vote}`, {method: "POST"})
+    voteComment = () => {
+        const response = fetch(`${apiUrl}comments/${this.props.comment.id}/addVote?vote=${this.state.vote}`, {method: "POST"})
         if (response.status === 200) {
-            const comment = await response.json();
+            const comment = response.json();
             this.setState(prevState => ({like: comment.like, dislike: comment.dislike}));
         }
         if (response.status === 401)
