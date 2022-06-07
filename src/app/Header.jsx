@@ -1,5 +1,5 @@
 import React from "react";
-import reactDom from "react-dom";
+import ReactDOM from "react-dom";
 import iemdb from "../assets/images/template.png";
 import DropdownList from "./Dropdown";
 import Login from "./login/Login";
@@ -11,11 +11,11 @@ const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, sear
     const handleClick = (e) => {
         const clickedText = e.target.innerHTML;
         if (clickedText === 'watch list')
-            reactDom.render(<Watchlist />, document.getElementById("root"));
+            ReactDOM.render(<Watchlist />, document.getElementById("root"));
         if (clickedText === 'ورود')
-            reactDom.render(<Login/>, document.getElementById("root"));
+            ReactDOM.render(<Login/>, document.getElementById("root"));
         if (clickedText === 'ثبت نام')
-            reactDom.render(<Signup/>, document.getElementById("root"));
+            ReactDOM.render(<Signup/>, document.getElementById("root"));
     }
 
     return (
@@ -25,7 +25,7 @@ const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, sear
             {withSearch && <Search handleSearchByChange={handleSearchByChange}
                 handleSearchValueChange={handleSearchValueChange}
                 searchMovies={searchMovies} />}
-            {isProfileActive && withSearch && (<DropdownList items={userEmail ? [userEmail, "watch list"] : ["ورود", "ثبت نام"]} clickHandler={handleClick} />)}
+            <DropdownList items={["ورود", "ثبت نام"]} clickHandler={handleClick}/>
         </div>
     );
 }

@@ -8,7 +8,6 @@ export default function Home() {
 
     return (
         <div className="container">
-            {/*<Header withSearch={true}/>*/}
             <Movies/>
         </div>
     );

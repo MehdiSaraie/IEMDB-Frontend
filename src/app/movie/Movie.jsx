@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import reactDom from "react-dom";
+import ReactDOM from "react-dom";
 import "../../assets/css/movie.css";
 import star from "../../assets/images/star.png";
 import Header from "../Header";
@@ -28,10 +28,10 @@ class MoviePage extends Component {
     addtoWatchlist = async () => {
         let response = await fetch(apiUrl + "watchlist?movie_id=" + this.props.movie.id, {method: "POST"});
         if (response.ok) {
-            reactDom.render(<Watchlist />, document.getElementById("root"));
+            ReactDOM.render(<Watchlist />, document.getElementById("root"));
         }
         if (response.status === 401)
-            reactDom.render(<Login page="watchlist" />, document.getElementById("root"));
+            ReactDOM.render(<Login page="watchlist" />, document.getElementById("root"));
     }
 
     componentDidMount() {
@@ -122,7 +122,7 @@ const Comments = ({basicComments, movie}) => {
             console.log(newComments);
         }
         if (response.status === 401)
-            reactDom.render(<Login page="movie" movie={movie} />, document.getElementById("root"));
+            ReactDOM.render(<Login page="movie" movie={movie} />, document.getElementById("root"));
     };
 
     return (
@@ -159,7 +159,7 @@ class Comment extends Component {
             this.setState(prevState => ({like: comment.like, dislike: comment.dislike}));
         }
         if (response.status === 401)
-            reactDom.render(<Login page="movie" movie={this.props.movie} />, document.getElementById("root"));
+            ReactDOM.render(<Login page="movie" movie={this.props.movie} />, document.getElementById("root"));
     };
 
     componentDidUpdate(prevProps, prevState) {

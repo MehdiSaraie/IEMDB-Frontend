@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import reactDom from "react-dom";
+import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
 import Login from "./Login";
@@ -33,16 +33,16 @@ export default function Signup() {
     }
 
     return (
-        <>
+        <div className='container'>
             <Header />
             <div className="main login-main">
                 <p className="sign">ثبت نام</p>
                 <form onSubmit={signup}>
-                    <Input className="inputText" type="text" autoComplete="off" placeholder="نام" required onChange={setName}/>
-                    <Input className="inputText" type="text" autoComplete="off" placeholder="نام مستعار" required onChange={setNickName}/>
-                    <Input className="inputText" type="date" autoComplete="off" placeholder="تاریخ تولد" onChange={setBirthDate}/>
-                    <Input className="inputText" type="email" autoComplete="off" placeholder="ایمیل" required onChange={setEmail}/>
-                    <Input className="inputText" type="password" autoComplete="off" placeholder="رمز عبور" required onChange={setPassword}/>
+                    <Input className="inputText" type="text" autoComplete="off" placeholder="نام" required onChange={setName} value={name}/>
+                    <Input className="inputText" type="text" autoComplete="off" placeholder="نام مستعار" required onChange={setNickName} value={nickname}/>
+                    <Input className="inputText" type="date" autoComplete="off" placeholder="تاریخ تولد" onChange={setBirthDate} value={birthDate}/>
+                    <Input className="inputText" type="email" autoComplete="off" placeholder="ایمیل" required onChange={setEmail} value={email}/>
+                    <Input className="inputText" type="password" autoComplete="off" placeholder="رمز عبور" required onChange={setPassword} value={password}/>
                     <div className="text-center">
                         <button type="submit" className="login-submit">ثبت نام</button>
                     </div>
@@ -51,11 +51,11 @@ export default function Signup() {
                     <a href="https://github.com/login/oauth/authorize?client_id=17736afbe983a0754dd1&scope=user"><button type="submit" className="login-submit">احراز هویت با گیت هاب</button></a>
                 </div>
                 <br />
-                <a className="signup" onClick={() => reactDom.render(<Login/>, document.getElementById("root"))}>از اینجا وارد شوید</a>
+                <a className="signup" onClick={()=>ReactDOM.render(<Login/>, document.getElementById("root"))}>از اینجا وارد شوید</a>
                 <br />
                 <br />
             </div>
-        </>
+        </div>
 
     );
 }

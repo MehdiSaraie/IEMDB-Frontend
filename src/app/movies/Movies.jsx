@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import reactDom from "react-dom";
+import ReactDOM from "react-dom";
 import "../../assets/css/movies.css"
 import Header from "../Header";
 import Sort from "./Sort";
@@ -77,7 +77,7 @@ export default function Movies(email) {
 const Movie = ({movie}) => {
     return (
         <div className="movie">
-            <div className="hoverable-image" onClick={() => reactDom.render(<MoviePage movie={movie} />, document.getElementById("root"))}>
+            <div className="hoverable-image" onClick={() => ReactDOM.render(<MoviePage movie={movie} />, document.getElementById("root"))}>
                 <img src={movie.image} alt={movie.name} />
                 <a className="cover"></a>
                 <div className="coverText">

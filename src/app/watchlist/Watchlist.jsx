@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import reactDom from "react-dom";
+import ReactDOM from "react-dom";
 import "../../assets/css/watchlist.css";
 import Header from "../Header";
 import { apiUrl } from "../../..";
@@ -20,7 +20,7 @@ class Watchlist extends Component {
             console.log(watchlist);
         }
         if (response.status === 401)
-            reactDom.render(<Login page="watchlist" />, document.getElementById("root"));
+            ReactDOM.render(<Login page="watchlist" />, document.getElementById("root"));
     };
 
     removeFromWatchlist = async (movieId) => {
@@ -29,7 +29,7 @@ class Watchlist extends Component {
             this.fetchWatchlist();
         }
         if (response.status === 401)
-            reactDom.render(<Login page="watchlist" />, document.getElementById("root"));
+            ReactDOM.render(<Login page="watchlist" />, document.getElementById("root"));
     }
 
     componentDidMount() {

@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
-import reactDom from "react-dom";
+import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
 import Signup from "./Signup";
@@ -58,7 +58,7 @@ export default function Login() {
                     <a href="https://github.com/login/oauth/authorize?client_id=17736afbe983a0754dd1&scope=user"><button type="submit" className="login-submit">احراز هویت با گیت هاب</button></a>
                 </div>
                 <br />
-                <a className="signup" onClick={() => reactDom.render(<Signup/>, document.getElementById("root"))}>حساب نداربد؟ اینجا کلیک کنید</a>
+                <a className="signup" onClick={() => ReactDOM.render(<Signup/>, document.getElementById("root"))}>حساب نداربد؟ اینجا کلیک کنید</a>
                 <br />
                 <br />
             </div>
