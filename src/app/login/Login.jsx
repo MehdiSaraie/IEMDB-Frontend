@@ -13,15 +13,15 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const history = useHistory();
+    // const history = useHistory();
     const auth = useAuth();
 
-    function login(e) {
+    function loginnn(e) {
         e.preventDefault();
 
         auth.login(email, password).then(() => {
             toast.success('باموفقیت وارد شدید.');
-            history.push('/');
+            // history.push('/');
         }).catch(() => {
             toast.error('ایمیل یا رمز عبور اشتباه است.');
         });
@@ -32,7 +32,7 @@ export default function Login() {
             <Header />
             <div className="main login-main">
                 <p className="sign">ورود</p>
-                <form onSubmit={login}>
+                <form onSubmit={loginnn}>
                     <Input
                         className="inputText"
                         type="email"

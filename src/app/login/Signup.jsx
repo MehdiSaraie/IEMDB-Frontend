@@ -4,6 +4,8 @@ import "../../assets/css/login-signup.css";
 import Header from "../Header";
 import Login from "./Login";
 import Input from '../components/Input';
+// import {useHistory} from 'react-router';
+import { useAuth } from '../../hooks/use-auth';
 
 
 export default function Signup() {
@@ -13,31 +15,49 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const history = useHistory();
+    // const history = useHistory();
     const auth = useAuth();
 
-    function signup(e) {
-        e.preventDefault();
-        auth.signup(name, nickname, birthDate, email, password).then(() => {
-            toast.success('باموفقیت ثبت‌نام شدید.');
-            history.push('/');
-        }).catch((err) => {
-            let message;
-            try {
-                message = err.response.data.error;
-            } catch (error) {
-                message = 'خطایی رخ داده است.';
-            }
-            toast.error(message);
-        });
-    }
+    // function signup_(e) {
+    //     e.preventDefault();
+    //     auth.signup(name, nickname, birthDate, email, password).then(() => {
+    //         debugger
+    //         toast.success('باموفقیت ثبت‌نام شدید.');
+    //         history.push('/');
+    //         debugger
+    //     }).catch((err) => {
+    //         let message;
+    //         debugger
+    //         try {
+    //             message = err.response.data.error;
+    //         } catch (error) {
+    //             message = 'خطایی رخ داده است.';
+    //         }
+    //         toast.error(message);
+    //     });
+    // }
 
     return (
         <div className='container'>
             <Header />
             <div className="main login-main">
                 <p className="sign">ثبت نام</p>
-                <form onSubmit={signup}>
+                <form onSubmit={(e) => {e.preventDefault();
+                    auth.signup(name, nickname, birthDate, email, password).then(() => {
+                    debugger
+                    toast.success('باموفقیت ثبت‌نام شدید.');
+                    // history.push('/');
+                    debugger
+                }).catch((err) => {
+                    let message;
+                    debugger
+                    try {
+                    message = err.response.data.error;
+                } catch (error) {
+                    message = 'خطایی رخ داده است.';
+                }
+                    toast.error(message);
+                });}}>
                     <Input className="inputText" type="text" autoComplete="off" placeholder="نام" required onChange={setName} value={name}/>
                     <Input className="inputText" type="text" autoComplete="off" placeholder="نام مستعار" required onChange={setNickName} value={nickname}/>
                     <Input className="inputText" type="date" autoComplete="off" placeholder="تاریخ تولد" onChange={setBirthDate} value={birthDate}/>
@@ -56,6 +76,5 @@ export default function Signup() {
                 <br />
             </div>
         </div>
-
     );
 }
