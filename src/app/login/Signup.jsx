@@ -39,7 +39,22 @@ export default function Signup() {
             <Header />
             <div className="main login-main">
                 <p className="sign">ثبت نام</p>
-                <form onSubmit={signup}>
+                <form onSubmit={(e) => {e.preventDefault();
+                    auth.signup(name, nickname, birthDate, email, password).then(() => {
+                    debugger
+                    toast.success('باموفقیت ثبت‌نام شدید.');
+                    // history.push('/');
+                    debugger
+                }).catch((err) => {
+                    let message;
+                    debugger
+                    try {
+                    message = err.response.data.error;
+                } catch (error) {
+                    message = 'خطایی رخ داده است.';
+                }
+                    toast.error(message);
+                });}}>
                     <Input className="inputText" type="text" autoComplete="off" placeholder="نام" required onChange={setName} value={name}/>
                     <Input className="inputText" type="text" autoComplete="off" placeholder="نام مستعار" required onChange={setNickName} value={nickname}/>
                     <Input className="inputText" type="date" autoComplete="off" placeholder="تاریخ تولد" onChange={setBirthDate} value={birthDate}/>
@@ -58,6 +73,5 @@ export default function Signup() {
                 <br />
             </div>
         </div>
-
     );
 }
