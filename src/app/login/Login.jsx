@@ -16,7 +16,7 @@ export default function Login() {
     const history = useHistory();
     const auth = useAuth();
 
-    function loginnn(e) {
+    function login(e) {
         e.preventDefault();
         console.log(auth)
         auth.login(email, password).then(() => {
@@ -32,7 +32,7 @@ export default function Login() {
             <Header />
             <div className="main login-main">
                 <p className="sign">ورود</p>
-                <form onSubmit={loginnn}>
+                <form onSubmit={login}>
                     <Input
                         className="inputText"
                         type="email"
