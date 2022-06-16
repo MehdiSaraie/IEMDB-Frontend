@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
@@ -15,14 +15,14 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // const navigate = useNavigate();
+    const history = useHistory();
     const auth = useAuth();
 
     function signup(e) {
         e.preventDefault();
         auth.signup(name, nickname, birthDate, email, password).then(() => {
             toast.success('باموفقیت ثبت‌نام شدید.');
-            // navigate('/');
+            history.push('/');
         }).catch((err) => {
             let message;
             try {
