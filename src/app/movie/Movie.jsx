@@ -15,7 +15,6 @@ class MoviePage extends Component {
     }
 
     fetchMovie = async () => {
-        console.log('yesssssss')
         const response = await fetch(apiUrl + "movies/" + this.props.movieId);
         try {
             const movie = await response.json();

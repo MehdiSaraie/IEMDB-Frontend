@@ -11,14 +11,6 @@ class Actor extends Component {
     }
     
     fetchActedMovies = async () => {
-        const [searchBy, searchValue, sortBy] = [this.state.searchBy, this.state.searchValue, this.state.sortBy];
-        let filter = "";
-        if (searchBy === "نام")
-            filter = "name=" + searchValue;
-        if (searchBy === "ژانر")
-            filter = "genre=" + searchValue;
-        if (searchBy === "تاریخ انتشار")
-            filter = "releaseDate=" + searchValue;
         const response = await fetch(apiUrl + "movies?actor_id=" + this.props.actor.id);
         try {
             const actedMovies = await response.json();
@@ -44,7 +36,7 @@ class Actor extends Component {
                             <p>نام: {this.props.actor.name}</p>
                             <p>تاریخ تولد: {this.props.actor.birthDate}</p>
                             <p>ملیت: {this.props.actor.nationality}</p>
-                            <p>تعداد فیلم ها: {this.props.actor.actedMovies.length}</p>
+                            <p>تعداد فیلم ها: {this.state.actedMovies.length}</p>
                         </div>
                         <div className="actor-movies">
                             <p>فیلم ها</p>
