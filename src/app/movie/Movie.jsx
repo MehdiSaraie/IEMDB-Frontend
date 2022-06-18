@@ -11,11 +11,23 @@ import Watchlist from "../watchlist/Watchlist";
 class MoviePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {actors: []};
+        this.state = {actors: [], movie: null};
     }
 
+    fetchMovie = async () => {
+        console.log('yesssssss')
+        const response = await fetch(apiUrl + "movies/" + this.props.movieId);
+        try {
+            const movie = await response.json();
+            this.setState(prevState => ({movie: movie}));
+            console.log(movie);
+        } catch {
+            console.log(response);
+        }
+    };
+
     fetchActors = async () => {
-        const response = await fetch(apiUrl + "actors?movie_id=" + this.props.movie.id);
+        const response = await fetch(apiUrl + "actors?movie_id=" + this.props.movieId);
         try {
             const actors = await response.json();
             this.setState(prevState => ({actors: actors}));
@@ -26,7 +38,7 @@ class MoviePage extends Component {
     };
 
     addtoWatchlist = async () => {
-        let response = await fetch(apiUrl + "watchlist?movie_id=" + this.props.movie.id, {method: "POST"});
+        let response = await fetch(apiUrl + "watchlist?movie_id=" + this.state.movie.id, {method: "POST"});
         if (response.ok) {
             ReactDOM.render(<Watchlist />, document.getElementById("root"));
         }
@@ -35,6 +47,7 @@ class MoviePage extends Component {
     }
 
     componentDidMount() {
+        this.fetchMovie();
         this.fetchActors();
     }
 
@@ -44,18 +57,18 @@ class MoviePage extends Component {
                 <Header />
                 <div className="main">
                     <div className="bigMovieContainer">
-                        <img src={this.props.movie.coverImage} />
+                        <img src={this.state.movie?.coverImage} />
                     </div>
                     <div className="tiser">
-                        <MovieRate movie={this.props.movie} />
-                        <MovieDetails movie={this.props.movie} />
+                        <MovieRate movie={this.state.movie} />
+                        <MovieDetails movie={this.state.movie} />
                         <div className="smallMovieContainer">
-                            <img src={this.props.movie.image} alt={this.props.movie.name} />
+                            <img src={this.state.movie?.image} alt={this.state.movie?.name} />
                             <button className="addToWatchlistBtn" onClick={this.addtoWatchlist}>افزودن به لیست مشاهده</button>
                         </div>
                     </div>
                     <Actors actors={this.state.actors} />
-                    <Comments basicComments={this.props.movie.comments} movie={this.props.movie} />
+                    <Comments basicComments={this.state.movie?.comments} movie={this.state.movie} />
                 </div>
             </>
         )
@@ -65,14 +78,14 @@ class MoviePage extends Component {
 const MovieDetails = ({movie}) => {
     return (
         <div className="details">
-            <p className="title">{movie.name}</p>
-            <p>کارگردان: {movie.director}</p>
-            <p>نویسنده: {movie.writers.join(', ')}</p>
-            <p>مدت زمان: {movie.duration}</p>
+            <p className="title">{movie?.name}</p>
+            <p>کارگردان: {movie?.director}</p>
+            <p>نویسنده: {movie?.writers.join(', ')}</p>
+            <p>مدت زمان: {movie?.duration}</p>
             <br />
-            <p className="releaseDate">تاریخ انتشار: {movie.releaseDate}</p>
+            <p className="releaseDate">تاریخ انتشار: {movie?.releaseDate}</p>
             <hr />
-            <p className="summary">{movie.summary}</p>
+            <p className="summary">{movie?.summary}</p>
         </div>
     )
 }
@@ -81,7 +94,7 @@ const MovieRate = ({movie}) => {
     return (
         <div className="rateContainer">
             <div className="imdbRate">
-                <p>{movie.imdbRate}</p>
+                <p>{movie?.imdbRate}</p>
             </div>
             <div className="star">
                 <img src={star} />
@@ -89,10 +102,10 @@ const MovieRate = ({movie}) => {
             <div className="userRate">
                 <div>
                     <p className="userRateText">امتیاز کاربران</p>
-                    <p className="numRates">({movie.ratingCount} رای)</p>
+                    <p className="numRates">({movie?.ratingCount} رای)</p>
                 </div>
                 <div>
-                    <p>{movie.rating}</p>
+                    <p>{movie?.rating}</p>
                 </div>
             </div>
         </div>
@@ -134,7 +147,7 @@ const Comments = ({basicComments, movie}) => {
                 <textarea className="commentText" onChange={(e) => setNewCommentText(e.target.value)} value={newCommentText}></textarea>
                 <div className="submit" onClick={addComment}>ثبت</div>
             </div>
-            {comments.map((comment, index) => <Comment key={index} comment={comment} movie={movie} />)}
+            {comments?.map((comment, index) => <Comment key={index} comment={comment} movie={movie} />)}
         </div>
     );
 }
@@ -152,10 +165,10 @@ class Comment extends Component {
             this.setState(prevState => ({vote: newVote}));
     };
 
-    voteComment = () => {
-        const response = fetch(`${apiUrl}comments/${this.props.comment.id}/addVote?vote=${this.state.vote}`, {method: "POST"})
+    voteComment = async () => {
+        const response = await fetch(`${apiUrl}comments/${this.props.comment.id}/addVote?vote=${this.state.vote}`, {method: "POST"})
         if (response.status === 200) {
-            const comment = response.json();
+            const comment = await response.json();
             this.setState(prevState => ({like: comment.like, dislike: comment.dislike}));
         }
         if (response.status === 401)

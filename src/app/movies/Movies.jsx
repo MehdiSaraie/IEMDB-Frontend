@@ -1,40 +1,40 @@
-import React, { Component, useState } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from "react";
+import reactDom from "react-dom";
 import "../../assets/css/movies.css"
 import Header from "../Header";
 import Sort from "./Sort";
 import { apiUrl } from "../../..";
 import MoviePage from "../movie/Movie";
 
-export default function Movies(email) {
-    const [searchBy, setSearchBy] = useState('');
-    const [searchValue, setSearchValue] = useState('');
-    const [sortBy, setSortBy] = useState("imdbRate");
-    const [isProfileActive, setIsProfileActive] = useState(false);
-    const [movies, setMovies] = useState([]);
-
-    const handleSearchByChange = (event) => {
-        setSearchBy(event.target.innerHTML);
-    };
-
-    const handleSearchValueChange = (event) => {
-        setSearchValue(event.target.value);
-    };
-
-    const handleSortByChange = (event) => {
-        setSortBy(event.target.innerHTML);
-    };
-
-    const handleProfileIconClick = (event) => {
-        setIsProfileActive(!isProfileActive);
+class Movies extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {searchBy: "", searchValue: "", sortBy: "imdbRate", isProfileActive: false, movies: []};
     }
 
-    const searchMovies = (event) => {
+    handleSearchByChange = (event) => {
+        this.setState(prevState => ({searchBy: event.target.innerHTML}));
+    };
+
+    handleSearchValueChange = (event) => {
+        this.setState(prevState => ({searchValue: event.target.value}));
+    };
+
+    handleSortByChange = (event) => {
+        this.setState(prevState => ({sortBy: event.target.innerHTML}));
+    };
+
+    handleProfileIconClick = (event) => {
+        this.setState(prevState => ({isProfileActive: !prevState.isProfileActive}));
+    }
+
+    searchMovies = (event) => {
         if (!event.keyCode || event.keyCode === 13)
-            fetchMovies();
+            this.fetchMovies();
     }
 
-    const fetchMovies = () => {
+    fetchMovies = async () => {
+        const [searchBy, searchValue, sortBy] = [this.state.searchBy, this.state.searchValue, this.state.sortBy];
         let filter = "";
         if (searchBy === "نام")
             filter = "name=" + searchValue;
@@ -42,42 +42,52 @@ export default function Movies(email) {
             filter = "genre=" + searchValue;
         if (searchBy === "تاریخ انتشار")
             filter = "releaseDate=" + searchValue;
-        const response = fetch(apiUrl + "movies?" + filter + "&sortBy=" + (sortBy === "تاریخ" ? "date" : "imdbRate"));
+        const response = await fetch(apiUrl + "movies?" + filter + "&sortBy=" + (sortBy === "تاریخ" ? "date" : "imdbRate"));
         try {
-            const movies = response.json();
-            setMovies(movies)
+            const movies = await response.json();
+            this.setState(prevState => ({movies: movies}));
             console.log(movies);
         } catch {
             console.log(response);
         }
     }
 
-    return (
-        <>
-            <Header
-                withSearch={true}
-                handleSearchByChange={handleSearchByChange}
-                handleSearchValueChange={handleSearchValueChange}
-                searchMovies={searchMovies}
-                userEmail={email}
-                handleProfileIconClick={handleProfileIconClick}
-                isProfileActive={isProfileActive}
-            />
-            <div className="main">
-                <div className="movies">
-                    {movies.map((movie, index) => <Movie key={index} movie={movie} />)}
-                </div>
-                <Sort handleSortByChange={handleSortByChange} />
-            </div>
-        </>
-    );
+    componentDidMount() {
+        this.fetchMovies();
+    }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.sortBy !== this.state.sortBy)
+            this.fetchMovies();
+    }
+
+    render() {
+        return (
+            <>
+                <Header 
+                    withSearch={true} 
+                    handleSearchByChange={this.handleSearchByChange} 
+                    handleSearchValueChange={this.handleSearchValueChange}
+                    searchMovies={this.searchMovies}
+                    userEmail={this.props.userEmail}
+                    handleProfileIconClick={this.handleProfileIconClick}
+                    isProfileActive={this.state.isProfileActive}
+                />
+                <div className="main">
+                    <div className="movies">
+                        {this.state.movies.map((movie, index) => <Movie key={index} movie={movie} />)}
+                    </div>
+                    <Sort handleSortByChange={this.handleSortByChange} />
+                </div>
+            </>
+        );
+    }
 }
 
 const Movie = ({movie}) => {
     return (
         <div className="movie">
-            <div className="hoverable-image" onClick={() => ReactDOM.render(<MoviePage movie={movie} />, document.getElementById("root"))}>
+            <div className="hoverable-image" onClick={() => reactDom.render(<MoviePage movieId={movie.id} />, document.getElementById("root"))}>
                 <img src={movie.image} alt={movie.name} />
                 <a className="cover"></a>
                 <div className="coverText">
@@ -88,3 +98,5 @@ const Movie = ({movie}) => {
         </div>
     );
 }
+
+export default Movies;

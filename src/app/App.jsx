@@ -75,8 +75,6 @@ export default function App() {
         <ProvideAuth>
             <Router>
                 <div className="body">
-                    <Header withSearch={true}/>
-
                     <div className="content">
                         <Switch>
                             <PublicRoute path="/login">

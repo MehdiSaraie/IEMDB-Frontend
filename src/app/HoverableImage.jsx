@@ -5,7 +5,7 @@ import MoviePage from "./movie/Movie";
 
 const HoverableImage = ({entity, type}) => {
     return (
-        <div className={(type === 'actor' ? "hoverable-image actor" : "hoverable-image actor-hoverable-image actor-movie")} onClick={() => ReactDOM.render(type === 'actor' ? <Actor actor={entity} /> : <MoviePage movie={entity} />, document.getElementById("root"))}>
+        <div className={(type === 'actor' ? "hoverable-image actor" : "hoverable-image actor-hoverable-image actor-movie")} onClick={() => ReactDOM.render(type === 'actor' ? <Actor actor={entity} /> : <MoviePage movieId={entity.id} />, document.getElementById("root"))}>
             <img src={entity.image} alt={entity.name} />
             <a className="cover"></a>
             <div className="coverText">
