@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 'iemdb-front'
+spec:
+  selector:
+    matchLabels:
+      app: iemdb-client
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: iemdb-client
+    spec:
+      containers:
+        - name: 'iemdb-client'
+          image: 'quay.io/mahshidhpour/ie-front:latest'
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: '333m'
+              memory: '333Mi'
+            limits:
+              cpu: '333m'
+              memory: '333Mi'
