@@ -5,6 +5,7 @@ import Header from "../Header";
 import Sort from "./Sort";
 import { apiUrl } from "../../..";
 import MoviePage from "../movie/Movie";
+import { useHistory } from 'react-router-dom';
 
 class Movies extends Component {
     constructor(props) {
@@ -85,9 +86,14 @@ class Movies extends Component {
 }
 
 const Movie = ({movie}) => {
+    const history = useHistory();
+    console.log(movie)
     return (
         <div className="movie">
-            <div className="hoverable-image" onClick={() => reactDom.render(<MoviePage movieId={movie.id} />, document.getElementById("root"))}>
+            <div className="hoverable-image" onClick={
+                () => history.push(`/movies/${movie.id}`)
+                // () => reactDom.render(<MoviePage movieId={movie.id} />, document.getElementById("root"))
+            }>
                 <img src={movie.image} alt={movie.name} />
                 <a className="cover"></a>
                 <div className="coverText">

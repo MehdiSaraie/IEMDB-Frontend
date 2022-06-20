@@ -15,7 +15,7 @@ class MoviePage extends Component {
     }
 
     fetchMovie = async () => {
-        const response = await fetch(apiUrl + "movies/" + this.props.movieId);
+        const response = await fetch(apiUrl + "movies/" + this.props.match.params.id);
         try {
             const movie = await response.json();
             this.setState(prevState => ({movie: movie}));
@@ -26,7 +26,7 @@ class MoviePage extends Component {
     };
 
     fetchActors = async () => {
-        const response = await fetch(apiUrl + "actors?movie_id=" + this.props.movieId);
+        const response = await fetch(apiUrl + "actors?movie_id=" + this.props.match.params.id);
         try {
             const actors = await response.json();
             this.setState(prevState => ({actors: actors}));

@@ -7,11 +7,22 @@ import HoverableImage from "../HoverableImage";
 class Actor extends Component {
     constructor(props) {
         super(props);
-        this.state = {actedMovies: []};
+        this.state = {actedMovies: [], actor: null};
     }
     
+    fetchActor = async () => {
+        const response = await fetch(apiUrl + "actors/" + this.props.match.params.id);
+        try {
+            const actor = await response.json();
+            this.setState(prevState => ({actor: actor}));
+            console.log(actor);
+        } catch {
+            console.log(response);
+        }
+    };
+
     fetchActedMovies = async () => {
-        const response = await fetch(apiUrl + "movies?actor_id=" + this.props.actor.id);
+        const response = await fetch(apiUrl + "movies?actor_id=" + this.props.match.params.id);
         try {
             const actedMovies = await response.json();
             this.setState(prevState => ({actedMovies: actedMovies}));
@@ -22,6 +33,7 @@ class Actor extends Component {
     }
 
     componentDidMount() {
+        this.fetchActor();
         this.fetchActedMovies();
     }
 
@@ -33,9 +45,9 @@ class Actor extends Component {
                     <div className="actor-details">
                         <div className="actor-info">
                             <p>مشخصات بازیگر</p>
-                            <p>نام: {this.props.actor.name}</p>
-                            <p>تاریخ تولد: {this.props.actor.birthDate}</p>
-                            <p>ملیت: {this.props.actor.nationality}</p>
+                            <p>نام: {this.state.actor?.name}</p>
+                            <p>تاریخ تولد: {this.state.actor?.birthDate}</p>
+                            <p>ملیت: {this.state.actor?.nationality}</p>
                             <p>تعداد فیلم ها: {this.state.actedMovies.length}</p>
                         </div>
                         <div className="actor-movies">
@@ -46,7 +58,7 @@ class Actor extends Component {
                         </div>
                     </div>
                     <div className="actor-actor">
-                        <img src={this.props.actor.image} />
+                        <img src={this.state.actor?.image} />
                     </div>
                 </div>
             </>
