@@ -11,7 +11,7 @@ import Watchlist from "../watchlist/Watchlist";
 class MoviePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {actors: [], movie: null};
+        this.state = {actors: [], comments: [], movie: null};
     }
 
     fetchMovie = async () => {
@@ -19,7 +19,6 @@ class MoviePage extends Component {
         try {
             const movie = await response.json();
             this.setState(prevState => ({movie: movie}));
-            console.log(movie);
         } catch {
             console.log(response);
         }
@@ -30,14 +29,25 @@ class MoviePage extends Component {
         try {
             const actors = await response.json();
             this.setState(prevState => ({actors: actors}));
-            console.log(actors);
         } catch {
             console.log(response);
         }
     };
 
+    fetchComments = async () => {
+        const response = await fetch(apiUrl + "comments?movie_id=" + this.props.match.params.id);
+        try {
+            const comments = await response.json();
+            this.setState(prevState => ({comments: comments}));
+        } catch {
+            console.log(response);
+        }
+    };
+
+    setComments = (comments) => this.setState(comments);
+
     addtoWatchlist = async () => {
-        let response = await fetch(apiUrl + "watchlist?movie_id=" + this.state.movie.id, {method: "POST"});
+        let response = await fetch(apiUrl + "watchlist/add?movie_id=" + this.state.movie.id, {method: "POST"});
         if (response.ok) {
             ReactDOM.render(<Watchlist />, document.getElementById("root"));
         }
@@ -48,6 +58,7 @@ class MoviePage extends Component {
     componentDidMount() {
         this.fetchMovie();
         this.fetchActors();
+        this.fetchComments();
     }
 
     render() {
@@ -67,7 +78,7 @@ class MoviePage extends Component {
                         </div>
                     </div>
                     <Actors actors={this.state.actors} />
-                    <Comments basicComments={this.state.movie?.comments} movie={this.state.movie} />
+                    <Comments comments={this.state.comments} setComments={this.setComments} movie={this.state.movie} />
                 </div>
             </>
         )
@@ -122,15 +133,15 @@ const Actors = ({actors}) => {
     )
 }
 
-const Comments = ({basicComments, movie}) => {
+const Comments = ({comments, setComments, movie}) => {
     const [newCommentText, setNewCommentText] = useState("");
-    const [comments, setComments] = useState(basicComments);
     
     const addComment = async () => {
         const response = await fetch(`${apiUrl}movies/${movie.id}/addComment`, {method: "POST", body: newCommentText});
         if (response.ok) {
             const newComments = await response.json();
-            setComments(prevComments => newComments);
+            setComments(newComments);
+            setNewCommentText('');
             console.log(newComments);
         }
         if (response.status === 401)
@@ -146,7 +157,7 @@ const Comments = ({basicComments, movie}) => {
                 <textarea className="commentText" onChange={(e) => setNewCommentText(e.target.value)} value={newCommentText}></textarea>
                 <div className="submit" onClick={addComment}>ثبت</div>
             </div>
-            {comments?.map((comment, index) => <Comment key={index} comment={comment} movie={movie} />)}
+            {comments.map((comment, index) => <Comment key={index} comment={comment} movie={movie} />)}
         </div>
     );
 }

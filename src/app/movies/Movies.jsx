@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import reactDom from "react-dom";
 import "../../assets/css/movies.css"
 import Header from "../Header";
 import Sort from "./Sort";
 import { apiUrl } from "../../..";
-import MoviePage from "../movie/Movie";
 import { useHistory } from 'react-router-dom';
+import { privateRequest } from "../../services/private";
 
 class Movies extends Component {
     constructor(props) {
         super(props);
-        this.state = {searchBy: "", searchValue: "", sortBy: "imdbRate", isProfileActive: false, movies: []};
+        this.state = {searchBy: "", searchValue: "", sortBy: "imdbRate", movies: []};
     }
 
     handleSearchByChange = (event) => {
@@ -24,10 +23,6 @@ class Movies extends Component {
     handleSortByChange = (event) => {
         this.setState(prevState => ({sortBy: event.target.innerHTML}));
     };
-
-    handleProfileIconClick = (event) => {
-        this.setState(prevState => ({isProfileActive: !prevState.isProfileActive}));
-    }
 
     searchMovies = (event) => {
         if (!event.keyCode || event.keyCode === 13)
@@ -43,14 +38,10 @@ class Movies extends Component {
             filter = "genre=" + searchValue;
         if (searchBy === "تاریخ انتشار")
             filter = "releaseDate=" + searchValue;
-        const response = await fetch(apiUrl + "movies?" + filter + "&sortBy=" + (sortBy === "تاریخ" ? "date" : "imdbRate"));
-        try {
-            const movies = await response.json();
+        const movies = await privateRequest(apiUrl + "movies?" + filter + "&sortBy=" + (sortBy === "تاریخ" ? "date" : "imdbRate"));
+        if (!!movies)
             this.setState(prevState => ({movies: movies}));
-            console.log(movies);
-        } catch {
-            console.log(response);
-        }
+            
     }
 
     componentDidMount() {
@@ -70,9 +61,6 @@ class Movies extends Component {
                     handleSearchByChange={this.handleSearchByChange} 
                     handleSearchValueChange={this.handleSearchValueChange}
                     searchMovies={this.searchMovies}
-                    userEmail={this.props.userEmail}
-                    handleProfileIconClick={this.handleProfileIconClick}
-                    isProfileActive={this.state.isProfileActive}
                 />
                 <div className="main">
                     <div className="movies">
@@ -87,7 +75,6 @@ class Movies extends Component {
 
 const Movie = ({movie}) => {
     const history = useHistory();
-    console.log(movie)
     return (
         <div className="movie">
             <div className="hoverable-image" onClick={

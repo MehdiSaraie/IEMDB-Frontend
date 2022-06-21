@@ -5,6 +5,7 @@ import Header from "../Header";
 import { apiUrl } from "../../..";
 import HoverableImage from "../HoverableImage";
 import Login from "../login/Login";
+import { useHistory } from "react-router-dom";
 
 class Watchlist extends Component {
     constructor(props) {
@@ -17,14 +18,13 @@ class Watchlist extends Component {
         if (response.ok) {
             const watchlist = await response.json();
             this.setState(prevState => ({watchlist: watchlist}));
-            console.log(watchlist);
         }
         if (response.status === 401)
             ReactDOM.render(<Login page="watchlist" />, document.getElementById("root"));
     };
 
     removeFromWatchlist = async (movieId) => {
-        let response = await fetch(apiUrl + "watchlist?movie_id=" + movieId, {method: "DELETE"});
+        let response = await fetch(apiUrl + "watchlist/remove?movie_id=" + movieId, {method: "POST"});
         if (response.ok) {
             this.fetchWatchlist();
         }
@@ -88,8 +88,9 @@ const WatchlistMovie = ({movie, removeFromWatchlist}) => {
 }
 
 const SuggestedMovie = ({movie}) => {
+    const history = useHistory();
     return (
-        <div className="hoverable-image watchlist-movie">
+        <div className="hoverable-image watchlist-movie" onClick={() => history.push(`/movies/${movie.id}`)}>
             <img src={movie.image} />
             <a className="cover"></a>
             <div className="coverText">
@@ -101,16 +102,3 @@ const SuggestedMovie = ({movie}) => {
 }
 
 export default Watchlist;
-        // <div className="main">
-        //     <div className="suggestedMovies">
-        //         <p>فیلم های پیشنهادی</p>
-        //         <div className="moviesContainer horizontal-scrollable">
-        //             <div className="hoverable-image watchlist-movie">
-        //                 <img src="../image/salesman.jpg" />
-        //                 <a href="../movie/movie.html" className="cover"></a>
-        //                 <a href="../movie/movie.html" className="coverText">Salesman</a>
-        //                 <a href="../movie/movie.html" className="coverText">9.2</a>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>

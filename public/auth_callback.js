@@ -3,6 +3,6 @@ const baseUrl = "http://localhost:9500/";
 (async function athenticate() {
     const response = await fetch(apiUrl + 'users/auth_callback' + window.location.search);
     const JWT = (await response.json())["JWT"];
-    localStorage.setItem("JWT", JWT);
+    localStorage.setItem("token", JWT);
     location.href = baseUrl;
 })();

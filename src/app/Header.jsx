@@ -1,21 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import iemdb from "../assets/images/template.png";
+import { useAuth } from "../hooks/use-auth";
 import DropdownList from "./Dropdown";
-import Login from "./login/Login";
-import Signup from "./login/Signup";
 import Search from "./movies/Search";
-import Watchlist from "./watchlist/Watchlist";
 
-const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, searchMovies, handleProfileIconClick, isProfileActive, userEmail}) => {
-    const handleClick = (e) => {
+const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, searchMovies}) => {
+    const history = useHistory();
+    const auth = useAuth();
+
+    const [isProfileActive, setIsProfileActive] = useState(false)
+
+    const handleDropdownClick = (e) => {
         const clickedText = e.target.innerHTML;
-        if (clickedText === 'watch list')
-            ReactDOM.render(<Watchlist />, document.getElementById("root"));
-        if (clickedText === 'ورود')
-            ReactDOM.render(<Login/>, document.getElementById("root"));
-        if (clickedText === 'ثبت نام')
-            ReactDOM.render(<Signup/>, document.getElementById("root"));
+        if (clickedText === 'لیست تماشا')
+            history.push('/watchlist');
+        if (clickedText === 'خروج') {
+            auth.logout();
+            history.push('/login');
+        }
+    }
+
+    const handleProfileIconClick = (event) => {
+        setIsProfileActive(!isProfileActive);
     }
 
     return (
@@ -25,7 +32,7 @@ const Header = ({withSearch, handleSearchByChange, handleSearchValueChange, sear
             {withSearch && <Search handleSearchByChange={handleSearchByChange}
                 handleSearchValueChange={handleSearchValueChange}
                 searchMovies={searchMovies} />}
-            <DropdownList items={["ورود", "ثبت نام"]} clickHandler={handleClick}/>
+            {isProfileActive && (<DropdownList items={["لیست تماشا", "خروج"]} clickHandler={handleDropdownClick} />)}
         </div>
     );
 }

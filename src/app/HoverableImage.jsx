@@ -9,8 +9,7 @@ const HoverableImage = ({entity, type}) => {
     return (
         <div className={(type === 'actor' ? "hoverable-image actor" : "hoverable-image actor-hoverable-image actor-movie")} onClick={
             () => history.push(type === 'actor' ? `/actors/${entity.id}` : `/movies/${entity.id}`)
-            // () => ReactDOM.render(type === 'actor' ? <Actor actor={entity} /> : <MoviePage movieId={entity.id} />, document.getElementById("root"))
-            }>
+        }>
             <img src={entity.image} alt={entity.name} />
             <a className="cover"></a>
             <div className="coverText">

@@ -21,7 +21,8 @@ export default function Login() {
         console.log(auth)
         auth.login(email, password).then(() => {
             toast.success('باموفقیت وارد شدید.');
-            history.push('/');
+            // history.goBack();
+            history.push('/')
         }).catch(() => {
             toast.error('ایمیل یا رمز عبور اشتباه است.');
         });

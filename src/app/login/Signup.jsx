@@ -22,7 +22,8 @@ export default function Signup() {
         e.preventDefault();
         auth.signup(name, nickname, birthDate, email, password).then(() => {
             toast.success('باموفقیت ثبت‌نام شدید.');
-            history.push('/');
+            // history.goBack();
+            history.push('/')
         }).catch((err) => {
             let message;
             try {

@@ -15,7 +15,6 @@ class Actor extends Component {
         try {
             const actor = await response.json();
             this.setState(prevState => ({actor: actor}));
-            console.log(actor);
         } catch {
             console.log(response);
         }
@@ -26,7 +25,6 @@ class Actor extends Component {
         try {
             const actedMovies = await response.json();
             this.setState(prevState => ({actedMovies: actedMovies}));
-            console.log(actedMovies);
         } catch {
             console.log(response);
         }

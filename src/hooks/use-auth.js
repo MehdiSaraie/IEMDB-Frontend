@@ -1,5 +1,4 @@
-import React, { useState, useContext, createContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, createContext } from 'react';
 
 import { loginUser, signupUser } from '../services';
 
@@ -15,10 +14,6 @@ export function ProvideAuth({ children }) {
     );
 }
 
-ProvideAuth.propTypes = {
-    children: PropTypes.node,
-};
-
 export const useAuth = () => {
     return useContext(authContext);
 };
@@ -28,33 +23,18 @@ export function getToken() {
     return localStorage.getItem(storageKey);
 }
 
-function getParamToken() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('token');
-}
-
 function useProvideAuth() {
-    const [token, _setToken] = useState('');
-
-
-    useEffect(() => {
-        const paramToken = getParamToken();
-        const storedToken = localStorage.getItem(storageKey);
-
-        setToken(paramToken || storedToken || '');
-    });
 
     const setToken = (token) => {
-        _setToken(token);
         localStorage.setItem(storageKey, token);
     };
 
     const getIsLoggedIn = () => {
-        return Boolean(getParamToken() || token);
+        return Boolean(getToken());
     };
 
     const login = (email, password) => {
-        return loginUser(email, password).then((resp) => setToken(resp.data.token));
+        return loginUser(email, password).then((resp) => setToken(resp.data));
     };
 
     const signup = (name, nickname, birthDate, email, password) => {
@@ -64,7 +44,7 @@ function useProvideAuth() {
             birthDate,
             email,
             password,
-        ).then((resp) => setToken(resp.data.token));
+        ).then((resp) => setToken(resp.data));
     };
 
     const logout = () => {

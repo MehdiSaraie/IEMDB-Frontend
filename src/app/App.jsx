@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Header from './Header';
 import Login from './login/Login';
 import Signup from './login/Signup';
 import MoviePage from './movie/Movie';
@@ -17,24 +16,24 @@ import Movies from './movies/Movies'
 import Home from './home/Home';
 import { ProvideAuth, useAuth } from '../hooks/use-auth.js';
 import Actor from './actor/Actor';
+import Watchlist from './watchlist/Watchlist';
 
 function PrivateRoute({ render, ...rest }) {
     const auth = useAuth();
-    console.log(auth.getIsLoggedIn())
     return (
         <Route
             {...rest}
-            render={({ location, match }) =>
-                auth.getIsLoggedIn() ? (
+            render={({ location, match }) => {
+                return auth.getIsLoggedIn() ? (
                     render(match)
                 ) : (
                     <Redirect
                         to={{
                             pathname: '/login',
-                            state: { from: location },
+                            // state: { from: location },
                         }}
                     />
-                )
+                )}
             }
         />
     );
@@ -46,18 +45,19 @@ function PublicRoute({ children, ...rest }) {
     return (
         <Route
             {...rest}
-            render={({ location }) =>
-                !auth.getIsLoggedIn() ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/',
-                            state: { from: location },
-                        }}
-                    />
-                )
-            }
+            render={({ location }) => {
+                // return !auth.getIsLoggedIn() ? (
+                //     children
+                // ) : (
+                //     <Redirect
+                //         to={{
+                //             pathname: '/',
+                //             state: { from: location },
+                //         }}
+                //     />
+                // )}
+                return children
+            }}
         />
     );
 }
@@ -81,14 +81,11 @@ export default function App() {
                             <PublicRoute path="/signup">
                                 <Signup />
                             </PublicRoute>
-                            <PrivateRoute path="/movies/:id" render={(match) => <MoviePage match={match} />}>
-                            </PrivateRoute>
-                            <PrivateRoute path="/movies" render={(match) => <Movies match={match} />}>
-                            </PrivateRoute>
-                            <PrivateRoute path="/actors/:id" render={(match) => <Actor match={match} />}>
-                            </PrivateRoute>
-                            <PrivateRoute path="/" render={(match) => <Home match={match} />}>
-                            </PrivateRoute>
+                            <PrivateRoute path="/movies/:id" render={(match) => <MoviePage match={match} />} />
+                            <PrivateRoute path="/movies" render={(match) => <Movies match={match} />} />
+                            <PrivateRoute path="/actors/:id" render={(match) => <Actor match={match} />} />
+                            <PrivateRoute path="/watchlist" render={(match) => <Watchlist match={match} />} />
+                            <PrivateRoute path="/" render={(match) => <Home match={match} />} />
                         </Switch>
                     </div>
 
