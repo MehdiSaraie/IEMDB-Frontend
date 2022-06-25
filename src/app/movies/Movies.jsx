@@ -77,10 +77,7 @@ const Movie = ({movie}) => {
     const history = useHistory();
     return (
         <div className="movie">
-            <div className="hoverable-image" onClick={
-                () => history.push(`/movies/${movie.id}`)
-                // () => reactDom.render(<MoviePage movieId={movie.id} />, document.getElementById("root"))
-            }>
+            <div className="hoverable-image" onClick={() => history.push(`/movies/${movie.id}`)}>
                 <img src={movie.image} alt={movie.name} />
                 <a className="cover"></a>
                 <div className="coverText">

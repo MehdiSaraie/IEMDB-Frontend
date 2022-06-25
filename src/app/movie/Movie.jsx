@@ -38,19 +38,16 @@ class MoviePage extends Component {
         const response = await fetch(apiUrl + "comments?movie_id=" + this.props.match.params.id);
         try {
             const comments = await response.json();
-            this.setState(prevState => ({comments: comments}));
+            this.setComments(comments);
         } catch {
             console.log(response);
         }
     };
 
-    setComments = (comments) => this.setState(comments);
+    setComments = (comments) => this.setState(prevState => ({comments: comments}));
 
     addtoWatchlist = async () => {
         let response = await fetch(apiUrl + "watchlist/add?movie_id=" + this.state.movie.id, {method: "POST"});
-        if (response.ok) {
-            ReactDOM.render(<Watchlist />, document.getElementById("root"));
-        }
         if (response.status === 401)
             ReactDOM.render(<Login page="watchlist" />, document.getElementById("root"));
     }

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import * as ReactDOM from 'react-dom';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
-import Signup from "./Signup";
 import { useAuth } from '../../hooks/use-auth';
 import Input from '../components/Input';
 
@@ -23,9 +21,14 @@ export default function Login() {
             toast.success('باموفقیت وارد شدید.');
             // history.goBack();
             history.push('/')
-        }).catch(() => {
-            toast.error('ایمیل یا رمز عبور اشتباه است.');
-        });
+        }).catch((err) => {
+            let message;
+            if (err.response.status === 401)
+                message = 'ایمیل یا رمز عبور اشتباه است.';
+            else
+                message = 'خطایی رخ داده است.';
+            toast.error(message);
+        })
     }
 
     return (
@@ -59,7 +62,7 @@ export default function Login() {
                     <a href="https://github.com/login/oauth/authorize?client_id=17736afbe983a0754dd1&scope=user"><button type="submit" className="login-submit">احراز هویت با گیت هاب</button></a>
                 </div>
                 <br />
-                <a className="signup" onClick={() => ReactDOM.render(<Signup/>, document.getElementById("root"))}>حساب نداربد؟ اینجا کلیک کنید</a>
+                <a className="signup" onClick={() => history.push('/signup')}>حساب نداربد؟ اینجا کلیک کنید</a>
                 <br />
                 <br />
             </div>

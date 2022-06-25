@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import * as ReactDOM from 'react-dom';
+import { toast } from 'react-toastify';
 import "../../assets/css/login-signup.css";
 import Header from "../Header";
-import Login from "./Login";
 import Input from '../components/Input';
 import { useAuth } from "../../hooks/use-auth";
 
@@ -26,11 +25,10 @@ export default function Signup() {
             history.push('/')
         }).catch((err) => {
             let message;
-            try {
-                message = err.response.data.error;
-            } catch (error) {
+            if (err.response.status === 401)
+                message = 'کاربر از قبل وجود دارد.'
+            else
                 message = 'خطایی رخ داده است.';
-            }
             toast.error(message);
         });
     }
@@ -54,7 +52,7 @@ export default function Signup() {
                     <a href="https://github.com/login/oauth/authorize?client_id=17736afbe983a0754dd1&scope=user"><button type="submit" className="login-submit">احراز هویت با گیت هاب</button></a>
                 </div>
                 <br />
-                <a className="signup" onClick={()=>ReactDOM.render(<Login/>, document.getElementById("root"))}>از اینجا وارد شوید</a>
+                <a className="signup" onClick={() => history.push('/login')}>از اینجا وارد شوید</a>
                 <br />
                 <br />
             </div>
